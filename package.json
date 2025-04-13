@@ -1,0 +1,39 @@
+{
+  "name": "openrouter-cli-tool",
+  "displayName": "OpenRouter CLI Tool",
+  "description": "Command-line tool to manage OpenRouter API keys.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "cantalupo555",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cantalupo555/openrouter-cli-tool.git"
+  },
+  "homepage": "https://github.com/cantalupo555/openrouter-cli-tool#readme",
+  "keywords": [
+    "openrouter",
+    "cli",
+    "api",
+    "key-management",
+    "typescript"
+  ],
+  "engines": {
+    "node": ">=20",
+    "yarn": ">=1.22.0"
+  },
+  "main": "src/cli.ts",
+  "scripts": {
+    "manage": "tsx src/cli.ts",
+    "test-input": "tsx tests/testInput.ts",
+    "test-output": "tsx tests/testOutput.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3"
+  },
+  "dependencies": {
+    "@types/inquirer": "^9.0.7",
+    "dotenv": "^16.5.0",
+    "inquirer": "^12.5.2",
+    "node-fetch": "^3.3.2"
+  }
+}
