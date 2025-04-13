@@ -1,4 +1,5 @@
-import { makeApiRequest, ApiError } from '../utils/apiClient';
+import { makeApiRequest } from '../utils/apiClient';
+import { handleApiError } from '../utils/errorHandler';
 
 /**
  * @description Asynchronously deletes an API key by its hash.
@@ -49,8 +50,8 @@ export async function deleteApiKey(keyHash: string): Promise<void> {
     }
 
   } catch (error) {
-    console.error('\nError deleting the key:', (error as Error).message);
-    // Re-throws the error
+    handleApiError(error, `deleting key hash "${keyHash.trim()}"`);
+    // Re-throws the error so the caller (cli.ts) knows it failed
     throw error;
   }
 }

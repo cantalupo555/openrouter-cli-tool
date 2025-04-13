@@ -1,4 +1,5 @@
-import { makeApiRequest, ApiError } from '../utils/apiClient';
+import { makeApiRequest } from '../utils/apiClient';
+import { handleApiError } from '../utils/errorHandler';
 
 /**
  * @description Creates a new API key.
@@ -93,8 +94,8 @@ export async function createApiKey(name: string, label?: string | null, limit?: 
     }
 
   } catch (error) {
-    console.error('Error during key creation:', (error as Error).message);
-    // Re-throws the error
+    handleApiError(error, `creating key "${name.trim()}"`);
+    // Re-throws the error so the caller (cli.ts) knows it failed
     throw error;
   }
 }

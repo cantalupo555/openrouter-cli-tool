@@ -1,4 +1,5 @@
-import { makeApiRequest, ApiError } from '../utils/apiClient';
+import { makeApiRequest } from '../utils/apiClient';
+import { handleApiError } from '../utils/errorHandler';
 
 /**
  * @description Retrieves details for a specific API key by its hash.
@@ -48,8 +49,8 @@ export async function getSpecificKeyDetails(keyHash: string): Promise<void> {
     console.log(JSON.stringify(result.data || result, null, 2));
 
   } catch (error) {
-    console.error('Error fetching the key:', (error as Error).message);
-    // Re-throws the error
+    handleApiError(error, `fetching details for key hash "${keyHash.trim()}"`);
+    // Re-throws the error so the caller (cli.ts) knows it failed
     throw error;
   }
 }

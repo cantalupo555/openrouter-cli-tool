@@ -13,7 +13,8 @@ Project Root
 │   │   ├── listKeys.ts      # Lists all API keys
 │   │   └── updateKey.ts     # Existing key update
 │   ├── utils/
-│   │   └── apiClient.ts      # Central HTTP client for the OpenRouter API
+│   │   ├── apiClient.ts      # Central HTTP client for the OpenRouter API
+│   │   └── errorHandler.ts   # Centralized API error handling and reporting
 │   └── cli.ts                # Main interactive menu (entry point)
 │
 ├── tests/
@@ -23,9 +24,9 @@ Project Root
 ├── .env-tmp                # Example environment variables
 ├── .gitignore
 ├── LICENSE
-├── package.json
-├── README.md
-├── STRUCTURE.md
+├── package.json            # Project dependencies and scripts
+├── README.md               # Main project documentation
+├── STRUCTURE.md            # Describes the project's directory layout and file purposes
 └── yarn.lock
 ```
 
@@ -40,7 +41,10 @@ Project Root
   Functions for each main CLI operation (list, create, update, delete, etc.).
 
 - **src/utils/apiClient.ts**
-  Centralizes HTTP requests to the OpenRouter API and error handling.
+  Centralizes HTTP requests to the OpenRouter API.
+
+- **src/utils/errorHandler.ts**
+  Provides a consistent way to handle and display errors from the API client.
 
 - **tests/**
   Test scripts to interact directly with the API.
@@ -53,5 +57,8 @@ Project Root
 
 - **README.md**
   Main usage and installation documentation.
+
+- **STRUCTURE.md**
+  This file, describing the project layout and file purposes.
 
 ---

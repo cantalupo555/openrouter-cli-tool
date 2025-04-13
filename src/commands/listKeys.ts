@@ -1,4 +1,5 @@
-import { makeApiRequest, ApiError } from '../utils/apiClient';
+import { makeApiRequest } from '../utils/apiClient';
+import { handleApiError } from '../utils/errorHandler';
 
 // TODO: Define a specific type for the key object returned by the API
 type ApiKeyObject = {
@@ -108,9 +109,10 @@ export async function listApiKeys(): Promise<void> {
     }
 
   } catch (error) {
-    // The error is already formatted by apiClient
-    console.error('\nError during paginated listing process:', (error as Error).message);
-    // Re-throws the error so the caller can handle it
+    // Pass context, including the page number if the error happened mid-fetch
+    const context = `listing keys (around page ${currentPage})`;
+    handleApiError(error, context);
+    // Re-throws the error so the caller (cli.ts) knows it failed
     throw error;
   }
 }

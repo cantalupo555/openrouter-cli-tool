@@ -1,4 +1,5 @@
-import { makeApiRequest, ApiError } from '../utils/apiClient';
+import { makeApiRequest } from '../utils/apiClient';
+import { handleApiError } from '../utils/errorHandler';
 
 /**
  * @interface KeyUpdatePayload
@@ -71,8 +72,8 @@ export async function updateApiKey(keyHash: string, updates: KeyUpdatePayload): 
     console.log(JSON.stringify(result.data || result, null, 2));
 
   } catch (error) {
-    console.error('\nError updating the key:', (error as Error).message);
-    // Re-throws the error
+      handleApiError(error, `updating key hash "${keyHash.trim()}"`);
+      // Re-throws the error so the caller (cli.ts) knows it failed
     throw error;
   }
 }

@@ -1,4 +1,5 @@
-import { makeApiRequest, ApiError } from '../utils/apiClient';
+import { makeApiRequest } from '../utils/apiClient';
+import { handleApiError } from '../utils/errorHandler';
 
 /**
  * @description Checks the information and limits of an API key.
@@ -38,9 +39,9 @@ export async function checkApiKeyLimit(apiKeyOverride?: string): Promise<void> {
     console.log('Key information and limits:', result.data || result);
 
   } catch (error) {
-    // The error is already formatted by apiClient (if ApiError)
-    console.error('Error checking the key:', (error as Error).message);
-    // Re-throws the error so the caller can handle it
+    const context = apiKeyOverride ? `checking provided key` : `checking key from .env`;
+    handleApiError(error, context);
+    // Re-throws the error so the caller (cli.ts) knows it failed
     throw error;
   }
 }
